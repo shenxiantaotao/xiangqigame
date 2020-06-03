@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>象棋</title>
+    <style>
+        html {
+            font-size: 10px;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+
+        }
+
+        .qipan{
+            width: 60rem;
+            height: 60rem;
+            top: 2rem;
+            background: url('image/back.jpg') no-repeat;
+            background-size:cover;
+            margin: 0 auto;
+            /*居中 */
+
+        }
+
+        table{
+            width: 60rem;
+            height: 60rem;
+            top: 2rem;
+            border: solid 5px rgb(235, 119, 4);
+        }
+        td{
+            border: solid 2px  rgb(5, 167, 167);
+            position: absolute;
+        }
+        .hang{
+            border: solid 2px  rgb(5, 167, 167);
+            position: absolute;
+        }
+
+
+
+
+        /* .qipan {
+            width: 450px;
+            height: 450px;
+            background: #555;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -225px;
+            margin-left: -225px;
+        } */
+
+        /* .table {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
+
+        td {
+            border: solid 2px #0ff;
+        } */
+
+        .qizi {
+            width: 5rem;
+            height: 5rem;
+            cursor: pointer;
+            border-radius: 100%;
+            position: absolute;
+            border: solid 2px white;
+        }
+
+
+
+        #zhu {
+            margin-left: 3.5rem;
+            margin-top: 1rem;
+            background: url('image/zhu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #ma {`
+            margin-left: 9.5rem;
+            margin-top: 1rem;
+            background: url('image/ma.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #xiang {
+            margin-left: 15.5rem;
+            margin-top: 1rem;
+            background: url('image/xiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #shi {
+            margin-left: 21.5rem;
+            margin-top: 1rem;
+            background: url('image/shi.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #jiang {
+            margin-left: 27.5rem;
+            margin-top: 1rem;
+            background: url('image/jiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #shi2 {
+            margin-left: 33.5rem;
+            margin-top: 1rem;
+            background: url('image/shi.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #xiang2 {
+            margin-left: 39.5rem;
+            margin-top: 1rem;
+            background: url('image/xiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #ma2 {
+            margin-left: 45.5rem;
+            margin-top: 1rem;
+            background: url('image/ma.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #zhu2 {
+            margin-left: 51.5rem;
+            margin-top: 1rem;
+            background: url('image/zhu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #pao1 {
+            margin-left: 9.5rem;
+            margin-top: 12rem;
+            background: url('image/pao.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #pao2 {
+            margin-left: 45.5rem;
+            margin-top: 12rem;
+            background: url('image/pao.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing1 {
+            margin-left: 3.5rem;
+            margin-top: 17.5rem;
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing2 {
+            margin-left: 15.5rem;
+            margin-top: 17.5rem;
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing3 {
+            margin-left: 27.5rem;
+            margin-top: 17.5rem;
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing4 {
+            margin-left: 39.5rem;
+            margin-top: 17.5rem;
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing5 {
+            margin-left: 51.5rem;
+            margin-top: 17.5rem;
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+
+
+
+        #rzhu {
+            margin-left: 3.5rem;
+            margin-top: 54rem;
+            background: url('image/rzhu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rma {
+            margin-left: 9.5rem;
+            margin-top: 54rem;
+            background: url('image/rma.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rxiang {
+            margin-left: 15.5rem;
+            margin-top: 54rem;
+            background: url('image/rxiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rshi {
+            margin-left: 21.5rem;
+            margin-top: 54rem;
+            background: url('image/rshi.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rjiang {
+            margin-left: 27.5rem;
+            margin-top: 54rem;
+            background: url('image/rshuai.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rshi2 {
+            margin-left: 33.5rem;
+            margin-top: 54rem;
+            background: url('image/rshi.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rxiang2 {
+            margin-left: 39.5rem;
+            margin-top: 54rem;
+            background: url('image/rxiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rma2 {
+            margin-left: 45.5rem;
+            margin-top: 54rem;
+            background: url('image/rma.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rzhu2 {
+            margin-left: 51.5rem;
+            margin-top: 54rem;
+            background: url('image/rzhu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rpao1 {
+            margin-left: 9.5rem;
+            margin-top: 42rem;
+            background: url('image/rpao.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rpao2 {
+            margin-left: 45.5rem;
+            margin-top: 42rem;
+            background: url('image/rpao.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing1 {
+            margin-left: 3.5rem;
+            margin-top: 36rem;
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing2 {
+            margin-left: 15.5rem;
+            margin-top: 36rem;
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing3 {
+            margin-left: 27.5rem;
+            margin-top: 36rem;
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing4 {
+            margin-left: 39.5rem;
+            margin-top: 36rem;
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing5 {
+            margin-left: 51.5rem;
+            margin-top: 36rem;
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="qipan">
+
+        <!-- 黑色方 -->
+        <!-- <div class="qizi" id="zhu"></div>
+        <div class="qizi" id="ma"></div>
+        <div class="qizi" id="xiang"></div>
+        <div class="qizi" id="shi"></div>
+        <div class="qizi" id="jiang"></div>
+        <div class="qizi" id="shi2"></div>
+        <div class="qizi" id="xiang2"></div>
+        <div class="qizi" id="ma2"></div>
+        <div class="qizi" id="zhu2"></div>
+        <div class="qizi" id="pao1"></div>
+        <div class="qizi" id="pao2"></div>
+        <div class="qizi" id="bing1"></div>
+        <div class="qizi" id="bing2"></div>
+        <div class="qizi" id="bing3"></div>
+        <div class="qizi" id="bing4"></div>
+        <div class="qizi" id="bing5"></div> -->
+
+        <!-- 红色方 -->
+        <!-- <div class="qizi" id="rzhu"></div>
+        <div class="qizi" id="rma"></div>
+        <div class="qizi" id="rxiang"></div>
+        <div class="qizi" id="rshi"></div>
+        <div class="qizi" id="rjiang"></div>
+        <div class="qizi" id="rshi2"></div>
+        <div class="qizi" id="rxiang2"></div>
+        <div class="qizi" id="rma2"></div>
+        <div class="qizi" id="rzhu2"></div>
+        <div class="qizi" id="rpao1"></div>
+        <div class="qizi" id="rpao2"></div>
+        <div class="qizi" id="rbing1"></div>
+        <div class="qizi" id="rbing2"></div>
+        <div class="qizi" id="rbing3"></div>
+        <div class="qizi" id="rbing4"></div>
+        <div class="qizi" id="rbing5"></div> -->
+
+        <!-- 落子 -->
+        <!-- <div class="qizi" id="luozi"></div> -->
+
+
+        <table class="table">
+            <tr class="hang">
+                <td class="qizi" id="zhu"></td>
+                <td class="qizi" id="ma"></td>
+                <td class="qizi" id="xiang"></td>
+                <td class="qizi" id="shi"></td>
+                <td class="qizi" id="jiang"></td>
+                <td class="qizi" id="shi2"></td>
+                <td class="qizi" id="xiang2"></td>
+                <td class="qizi" id="ma2"></td>
+                <td class="qizi" id="zhu2"></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="pao1"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="pao2"></td>
+                <td class="qizi" id=""></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id="bing1"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="bing2"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="bing3"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="bing4"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="bing5"></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id="rbing1"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="rbing2"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="rbing3"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="rbing4"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="rbing5"></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="rpao1"></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id="rpao2"></td>
+                <td class="qizi" id=""></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+                <td class="qizi" id=""></td>
+            </tr>
+            <tr class="hang">
+                <td class="qizi" id="rzhu"></td>
+                <td class="qizi" id="rma"></td>
+                <td class="qizi" id="rxiang"></td>
+                <td class="qizi" id="rshi"></td>
+                <td class="qizi" id="rjiang"></td>
+                <td class="qizi" id="rshi2"></td>
+                <td class="qizi" id="rxiang2"></td>
+                <td class="qizi" id="rma2"></td>
+                <td class="qizi" id="rzhu2"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script>
+    // $(".qipan").on('click', '.qizi', function () {
+    //     var th = $(this);
+    //     console.log(th.attr('id'));
+    //     $id = th.attr('id');
+    //     switch ($id) {
+    //         case 'zhu':
+    //             alert($id);
+    //             break;
+    //         case 'ma':
+    //             alert($id);
+    //             break;
+    //         case 'xiang':
+    //             alert($id);
+    //             break;
+    //         case 'shi':
+    //             alert($id);
+    //             break;
+    //         case 'jiang':
+    //             alert($id);
+    //             break;
+    //         case 'shi2':
+    //             alert($id);
+    //             break;
+    //         case 'xiang2':
+    //             alert($id);
+    //             break;
+    //         case 'zhu2':
+    //             alert($id);
+    //             break;
+    //         case 'ma2':
+    //             alert($id);
+    //             break;
+    //         case 'pao1':
+    //             alert($id);
+    //             break;
+    //         case 'pao2':
+    //             alert($id);
+    //             break;
+    //         case 'bing1':
+    //             alert($id);
+    //             break;
+    //         case 'bing2':
+    //             alert($id);
+    //             break;
+    //         case 'bing3':
+    //             alert($id);
+    //             break;
+    //         case 'bing4':
+    //             alert($id);
+    //             break;
+    //         case 'bing5':
+    //             alert($id);
+    //             break;
+    //         default:
+    //             console.log('test');
+    //     }
+
+    // });
+
+    //移动位置
+    // function move($th, $x, $y) {
+    //     $th.css({ "margin-left": $x, "margin-top": $y });
+    // }
+
+
+//     获取页面某一元素的绝对X,Y坐标
+// var X = $('#DivID').offset().top;
+// var Y = $('#DivID').offset().left;
+
+    //点击移动到那里
+    // $(".qipan").on('click','')
+
+</script>
+
+</html>

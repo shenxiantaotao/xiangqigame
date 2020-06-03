@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>象棋</title>
+    <style>
+        html {
+            font-size: 10px;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+
+        }
+
+        .qipan {
+            width: 68rem;
+            height: 80rem;
+            background: url('image/qipan.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            /*居中 */
+            overflow: hidden;
+        }
+
+        table,
+        table tr,
+        table tr td {
+            /* border: 1px solid #0094ff; */
+        }
+
+        .table {
+            width: 57rem;
+            height: 61rem;
+            left: 5.4rem;
+            text-align: center;
+            border-collapse: collapse;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hedao {
+            height: 5rem;
+        }
+
+        td {
+            height: 6rem;
+        }
+
+        .qizi {
+            width: 5rem;
+            height: 5rem;
+            cursor: pointer;
+            border-radius: 100%;
+            border: solid 2px white;
+            position: relative;
+            /* display: none; */
+        }
+
+
+
+        #zhu {
+
+            background: url('image/zhu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #ma {
+
+            background: url('image/ma.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #xiang {
+
+            background: url('image/xiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #shi {
+
+            background: url('image/shi.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #jiang {
+
+            background: url('image/jiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #shi2 {
+
+            background: url('image/shi.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #xiang2 {
+
+            background: url('image/xiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #ma2 {
+
+            background: url('image/ma.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #zhu2 {
+
+            background: url('image/zhu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #pao1 {
+
+            background: url('image/pao.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #pao2 {
+
+            background: url('image/pao.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing1 {
+
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing2 {
+
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing3 {
+
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing4 {
+
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #bing5 {
+
+            background: url('image/zu.png') no-repeat;
+            background-size: 100%;
+        }
+
+
+
+
+        #rzhu {
+
+            background: url('image/rzhu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rma {
+
+            background: url('image/rma.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rxiang {
+
+            background: url('image/rxiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rshi {
+
+            background: url('image/rshi.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rjiang {
+
+            background: url('image/rshuai.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rshi2 {
+
+            background: url('image/rshi.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rxiang2 {
+
+            background: url('image/rxiang.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rma2 {
+
+            background: url('image/rma.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rzhu2 {
+
+            background: url('image/rzhu.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rpao1 {
+
+            background: url('image/rpao.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rpao2 {
+
+            background: url('image/rpao.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing1 {
+
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing2 {
+
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing3 {
+
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing4 {
+
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #rbing5 {
+
+            background: url('image/rbing.png') no-repeat;
+            background-size: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="qipan">
+        <table class="table">
+            <!-- 黑色方 -->
+            <tr class="hang">
+                <td>
+                    <div class="qizi" id="zhu" data-status="2"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="ma" data-status="2""></div>
+                </td>
+                <td>
+                    <div class=" qizi" id="xiang" data-status="2"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="shi" data-status="2"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="jiang" data-status="2"></div>
+
+                </td>
+                <td>
+                    <div class="qizi" id="shi2" data-status="2"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="xiang2" data-status="2"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="ma2" data-status="2"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="zhu2" data-status="2"></div>
+                </td>
+            </tr>
+            <tr class="hang">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="hang">
+                <td></td>
+                <td>
+                    <div class="qizi" id="pao1" data-status="2"></div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="pao2" data-status="2"></div>
+                </td>
+                <td></td>
+            </tr>
+            <tr class="hang">
+                <td>
+                    <div class="qizi" id="bing1" data-status="2"></div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="bing2" data-status="2"></div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="bing3" data-status="2"></div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="bing4" data-status="2"></div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="bing5" data-status="2"></div>
+                </td>
+            </tr>
+            <tr class="hang">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <!-- 河道 -->
+            <!-- <tr class="hedao">
+
+            </tr> -->
+
+            <!-- 红色方 -->
+            <tr class="hang">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="hang">
+                <td>
+                    <div class="qizi" id="rbing1" data-status="1"></div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="rbing2" data-status="1"></div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="rbing3" data-status="1"></div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="rbing4" data-status="1"></div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="rbing5" data-status="1"></div>
+                </td>
+            </tr>
+            <tr class="hang">
+                <td></td>
+                <td>
+                    <div class="qizi" id="rpao1" data-status="1"></div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <div class="qizi" id="rpao2" data-status="1"></div>
+                </td>
+                <td></td>
+            </tr>
+            <tr class="hang">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="hang">
+                <td>
+                    <div class="qizi" id="rzhu" data-status="1"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="rma" data-status="1"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="rxiang" data-status="1"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="rshi" data-status="1"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="rjiang" data-status="1"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="rshi2" data-status="1"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="rxiang2" data-status="1"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="rma2" data-status="1"></div>
+                </td>
+                <td>
+                    <div class="qizi" id="rzhu2" data-status="1"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 走子 -->
+    <input type="hidden" id="zouzi" value="" />  
+    <!-- //是否可以走 true 可以 -->
+    <input type="hidden" id="is_zou" value="false" />
+    <!-- //落子 -->
+    <input type="hidden" id="luozi" value="" />
+    <input type="hidden" id="data-status" value="2" />
+    <!-- //哪一色先走 1 红色 2、黑色 -->
+    <input type="hidden" id="weizhi" value="" />
+
+
+</body>
+<script src="js/jquery.min.js"></script>
+<script>
+    var html = '';
+    $(".qipan").on('click', '.qizi', function () {
+        var th = $(this);
+        var is_z = $("#is_zou").val();
+        var zouzi = $("#zouzi").val();
+        var dt = $("#data-status").val();
+        var end_arr = th.offset();
+
+        //console.log("选子--："+is_z+" "+zouzi);
+        if (is_z == 'false') {//选子状态
+            //先判断是哪一个颜色方走
+            var status = th.attr("data-status");
+            if (dt == status) {
+                $("#zouzi").val(th.attr('id'));
+                $("#is_zou").val(true);
+                var d = th.offset();
+                $("#weizhi").val(JSON.stringify(d));
+                weizhi = d;
+            } else {
+                if (dt == 1) {
+                    alert('红色方走');
+                } else {
+                    alert('黑色方走');
+
+                }
+                console.log('dt=' + dt + "  " + 'status=' + status);
+            }
+        } else {
+            luozi = th.offset();
+            $("#luozi").val(JSON.stringify(luozi));
+            console.log('luo2');
+            console.log(luozi);
+            if (is_true(end_arr)) {
+                $("#" + zouzi).remove();
+                th.attr('id', zouzi);
+                th.attr('data-status', dt);
+                huifu();
+                whoZou();//让   另一方走
+            } else {
+                alert("走错了");
+            }
+
+        }
+
+        // switch ($id) {
+        //     case 'zhu':
+        //         alert($id);
+        //         break;
+        //     case 'ma':
+        //         alert($id);
+        //         break;
+        //     case 'xiang':
+        //         alert($id);
+        //         break;
+        //     case 'shi':
+        //         alert($id);
+        //         break;
+        //     case 'jiang':
+        //         alert($id);
+        //         break;
+        //     case 'shi2':
+        //         alert($id);
+        //         break;
+        //     case 'xiang2':
+        //         alert($id);
+        //         break;
+        //     case 'zhu2':
+        //         alert($id);
+        //         break;
+        //     case 'ma2':
+        //         alert($id);
+        //         break;
+        //     case 'pao1':
+        //         alert($id);
+        //         break;
+        //     case 'pao2':
+
+        //         break;
+        //     case 'bing1':
+        //         alert($id);
+        //         break;
+        //     case 'bing2':
+        //         alert($id);
+        //         break;
+        //     case 'bing3':
+        //         alert($id);
+        //         break;
+        //     case 'bing4':
+        //         alert($id);
+        //         break;
+        //     case 'bing5':
+        //         alert($id);
+        //         break;
+        //     default:
+        //         console.log('test');
+        // }
+
+    });
+
+    //移动位置
+    // function move($th, $x, $y) {
+    //     $th.css({ "margin-left": $x, "margin-top": $y });
+    // }
+
+
+    //     获取页面某一元素的绝对X,Y坐标
+    // var X = $('#DivID').offset().top;
+    // var Y = $('#DivID').offset().left;
+
+    //落子到空白处
+    $(".qipan").on('click', 'td', function () {
+        var th = $(this);
+        var id = th.children("*").attr("id");
+        var zou = $("#zouzi").val();
+        var is_zou = $("#is_zou").val();
+        var end_arr = th.offset();
+        //console.log("落子--："+is_zou+" zouzi"+zou+" id="+id);
+
+        if (id == undefined && is_zou && zou != '') {
+            luozi = JSON.stringify(end_arr);//存下落子的位置
+            $("#luozi").val(luozi);
+            if (is_true(end_arr)) {
+                var status = $("#data-status").val();
+                $("#" + zou).remove();
+                html = '<div class="qizi" id="' + zou + '" data-status="' + status + '"></div>';
+                th.html(html);
+                huifu();
+                whoZou();//让   另一方走
+            } else {
+                alert("走错了");
+            }
+        }
+    });
+
+    //恢复棋子默认状态,取消选中
+    function huifu() {
+        $("#zouzi").val('');
+        $("#is_zou").val(false);
+        $("#weizhi").val('');
+        $("#luozi").val('');
+    }
+
+    //修改谁走，默认data-status为1 ，红色方先走
+    function whoZou() {
+        var d = $("#data-status").val();
+        if (d == 1) {
+            $("#data-status").val(2);
+        } else {
+            $("#data-status").val(1);
+        }
+    }
+
+    //获取两个位置之间相距x,y格子数
+    function countDis(start_arr = '', end_arr = '') {
+        var tablearr = $(".table").offset();
+        if (start_arr == '') {
+            start_arr = tablearr;//默认第一个格子的位置为起始位置
+        }
+        var tablewidth = $(".table").width();
+        var tabbleheight = $(".table").height();
+        var pwidth = tablewidth / 9;//一格子的宽度
+        var phheight = tabbleheight / 10;//一格子的高度
+        var x = end_arr.left - start_arr.left;//相距的宽度
+        var y = end_arr.top - start_arr.top;//相距的高度
+        var xnum = Math.round(x / pwidth);//x方向的格子数
+        var ynum = Math.round(y / phheight);//y方向的格子数
+        return [xnum, ynum];
+    }
+
+    //定义每种棋子的规则设置
+    function dingyi() {
+        var bing = [1, 1, 0];//x轴0不能动，y轴最多能动1格,z是否固定 0 否
+        var pao = [8, 9, 0];
+        var zhu = [8, 9, 0];
+        var ma = [2, 2, 1];
+        var xiang = [2, 2, 1];
+        var shi = [1, 1, 1];
+        var jiang = [1, 1, 0];
+        var r = [{ "bing": bing }, { "pao": pao }, { "zhu": zhu },
+        { "ma": ma }, { "xiang": xiang }, { "shi": shi }, { "jiang": jiang }]
+        return r;
+    }
+
+    //判断落子位置是否对了
+    function is_true(end_arr = []) {
+        var start_arr = $("#weizhi").val();
+        start_arr = $.parseJSON(start_arr);
+        var dis = countDis(start_arr, end_arr);//选子和落子的距离
+        var d = dingyi();//规则
+        var zouzi = $("#zouzi").val();
+        var arr = [];
+        var r = false;
+        switch (zouzi) {
+            case 'bing1':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'bing1');
+                break;
+            case 'bing2':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'bing2');
+                break;
+            case 'bing3':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'bing3');
+                break;
+            case 'bing4':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'bing4');
+                break;
+            case 'bing5':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'bing5');
+                break;
+            case 'pao1':
+                arr = d[1].pao;
+                r = checkZou(arr, dis, 'pao1');
+                break;
+            case 'pao2':
+                arr = d[1].pao;
+                r = checkZou(arr, dis, 'pao2');
+                break;
+            case 'zhu':
+                arr = d[2].zhu;
+                r = checkZou(arr, dis, 'zhu');
+                break;
+            case 'ma':
+                arr = d[3].ma;
+                r = checkZou(arr, dis, 'ma');
+                break;
+            case 'xiang':
+                arr = d[4].xiang;
+                r = checkZou(arr, dis, 'xiang');
+                break;
+            case 'shi':
+                arr = d[5].shi;
+                r = checkZou(arr, dis, 'shi');
+                break;
+            case 'jiang':
+                arr = d[6].jiang;
+                r = checkZou(arr, dis, 'jiang');
+                break;
+            case 'zhu2':
+                arr = d[2].zhu;
+                r = checkZou(arr, dis, 'zhu2');
+                break;
+            case 'ma2':
+                arr = d[3].ma;
+                r = checkZou(arr, dis, 'ma2');
+                break;
+            case 'xiang2':
+                arr = d[4].xiang;
+                r = checkZou(arr, dis, 'xiang2');
+                break;
+            case 'shi2':
+                arr = d[5].shi;
+                r = checkZou(arr, dis, 'shi2');
+                break;
+
+
+            case 'rbing1':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'rbing1');
+                break;
+            case 'rbing2':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'rbing2');
+                break;
+            case 'rbing3':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'rbing3');
+                break;
+            case 'rbing4':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'rbing4');
+                break;
+            case 'rbing5':
+                arr = d[0].bing;
+                r = checkZou(arr, dis, 'rbing5');
+                break;
+            case 'rpao1':
+                arr = d[1].pao;
+                r = checkZou(arr, dis, 'rpao1');
+                break;
+            case 'rpao2':
+                arr = d[1].pao;
+                r = checkZou(arr, dis, 'rpao2');
+                break;
+            case 'rzhu':
+                arr = d[2].zhu;
+                r = checkZou(arr, dis, 'rzhu');
+                break;
+            case 'rma':
+                arr = d[3].ma;
+                r = checkZou(arr, dis, 'rma');
+                break;
+            case 'rxiang':
+                arr = d[4].xiang;
+                r = checkZou(arr, dis, 'rxiang');
+                break;
+            case 'rshi':
+                arr = d[5].shi;
+                r = checkZou(arr, dis, 'rshi');
+                break;
+            case 'rjiang':
+                arr = d[6].jiang;
+                r = checkZou(arr, dis, 'rjiang');
+                break;
+            case 'rzhu2':
+                arr = d[2].zhu;
+                r = checkZou(arr, dis, 'rzhu2');
+                break;
+            case 'rma2':
+                arr = d[3].ma;
+                r = checkZou(arr, dis, 'rma2');
+                break;
+            case 'rxiang2':
+                arr = d[4].xiang;
+                r = checkZou(arr, dis, 'rxiang2');
+                break;
+            case 'rshi2':
+                arr = d[5].shi;
+                r = checkZou(arr, dis, 'rshi2');
+                break;
+            default: '';
+        }
+        // console.log(arr);
+        // console.log(dis);
+        // console.log(r);
+        // console.log(zouzi);
+        return r;
+    }
+
+    //根据x,y距离和规则，判断是否能走
+    function checkZou(guize = [], dis = [], zouzi = '') {
+        if (guize[0] < Math.abs(dis[0])) {
+            return false;
+        }
+        if (guize[1] < Math.abs(dis[1])) {
+            return false;
+        }
+        //原地走的
+        if (dis[0] == 0 && dis[1] == 0) {
+            return false;
+        }
+        var xiang_arr = ['xiang', 'xiang2', 'rxiang', 'rxiang2'];
+        var ma_arr = ['ma', 'ma2', 'rma', 'rma2'];
+        var bing_arr = ['bing1', 'bing2', 'bing3', 'bing4', 'bing5'];
+        var rbing_arr = ['rbing1', 'rbing2', 'rbing3', 'rbing4', 'rbing5'];
+        var zhu_arr = ['zhu', 'zhu2', 'rzhu', 'rzhu2'];
+        var shi_arr = ['shi', 'shi2'];//黑士
+        var rshi_arr = ['rshi', 'rshi2'];//红士
+        var pao_arr = ['pao1', 'pao2', 'rpao1', 'rpao2'];//炮
+
+        //获取落子位置距离起始位置的距离
+        var tablearr = $(".table").offset();
+        var luozi1 = $("#luozi").val();
+        luozi1 = $.parseJSON(luozi1);
+
+        var dis_bing = countDis(tablearr, luozi1);
+        // console.log('dis_bing相对于棋盘===');
+        // console.log(dis_bing);
+        // console.log("guize棋子规则====");
+        // console.log(guize);
+        // console.log("dis落子距离选子位置====");
+        // console.log(dis);
+
+        if (guize[2] == 1) {
+            // 像的走法
+            if (xiang_arr.indexOf(zouzi) >= 0) {
+                if (guize[0] != Math.abs(dis[0])) {
+                    return false;
+                } else if (guize[1] != Math.abs(dis[1])) {
+                    return false;
+                }
+            }
+            //马的走法
+            if (ma_arr.indexOf(zouzi) >= 0) {
+                if ((Math.abs(dis[0]) == 1 && Math.abs(dis[1]) == 2) || (Math.abs(dis[0]) == 2 && Math.abs(dis[1]) == 1)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            //黑士走法
+            if (shi_arr.indexOf(zouzi) >= 0) {
+                if (guize[0] != Math.abs(dis[0])) {
+                    return false;
+                } else if (guize[1] != Math.abs(dis[1])) {
+                    return false;
+                } else if (Math.abs(dis_bing[0]) < 3 || Math.abs(dis_bing[0]) > 5 || Math.abs(dis_bing[1]) > 2) {
+                    return false;
+                }
+            }
+            //红士走法
+            if (rshi_arr.indexOf(zouzi) >= 0) {
+                if (guize[0] != Math.abs(dis[0])) {
+                    return false;
+                } else if (guize[1] != Math.abs(dis[1])) {
+                    return false;
+                } else if (Math.abs(dis_bing[0]) < 3 || Math.abs(dis_bing[0]) > 5 || Math.abs(dis_bing[1]) < 7) {
+                    return false;
+                }
+            }
+        } else {
+            //黑兵的走法
+            if (bing_arr.indexOf(zouzi) >= 0) {
+                //不过河
+                if (dis_bing[1] < 5) {
+                    if (dis[0] != 0) {
+                        return false;
+                    }
+                    if (guize[1] < dis[1] || dis[1] < 0) {
+                        return false;
+                    }
+                }
+            }
+
+            //红兵的走法
+            if (rbing_arr.indexOf(zouzi) >= 0) {
+                //不过河
+                if (dis_bing[1] >= 5) {
+                    if (dis[0] != 0) {
+                        return false;
+                    }
+                    if (guize[1] < Math.abs(dis[1]) || dis[1] > 0) {
+                        return false;
+                    }
+                }
+            }
+
+            //猪的走法
+            if (zhu_arr.indexOf(zouzi) >= 0) {
+                if ((dis[0] == 0 && Math.abs(dis[1]) <= guize[1]) || (dis[1] == 0 && Math.abs(dis[0]) <= guize[0])) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            //炮的走法
+            if (pao_arr.indexOf(zouzi) >= 0) {
+                if ((dis[0] == 0 && Math.abs(dis[1]) <= guize[1]) || (dis[1] == 0 && Math.abs(dis[0]) <= guize[0])) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            //黑将走法
+            if (zouzi == 'jiang') {
+                if (Math.abs(dis_bing[0]) >= 3 && Math.abs(dis_bing[0]) <= 5 && Math.abs(dis_bing[1]) <= 2) {
+                    if (guize[0] != Math.abs(dis[0]) && guize[1] == Math.abs(dis[1])) {
+                        return true;
+                    } else if (guize[1] != Math.abs(dis[1]) && guize[0] == Math.abs(dis[0])) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+
+            }
+
+
+            //红将走法
+            if (zouzi == 'rjiang') {
+                if (Math.abs(dis_bing[0]) >= 3 && Math.abs(dis_bing[0]) <= 5 && Math.abs(dis_bing[1]) >= 7) {
+                    if (guize[0] != Math.abs(dis[0]) && guize[1] == Math.abs(dis[1])) {
+                        return true;
+                    } else if (guize[1] != Math.abs(dis[1]) && guize[0] == Math.abs(dis[0])) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+</script>
+
+</html>
